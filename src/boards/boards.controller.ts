@@ -9,7 +9,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { IsNotEmpty } from 'class-validator';
 import { Board, BoardStatus } from './board.model';
 import { BoardsService } from './boards.service';
 import { createBoardDto } from './dto/create-board.dto';
@@ -25,7 +24,7 @@ export class BoardsController {
   }
 
   @Post()
-  @IsNotEmpty()
+  @UsePipes(ValidationPipe)
   createBoard(@Body() createBoardDto: createBoardDto): Board {
     return this.boardsService.createBoard(createBoardDto);
   }
